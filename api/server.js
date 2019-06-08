@@ -1,0 +1,65 @@
+const express = require("express")
+
+const bodyParser = require("body-parser")
+
+const admin = require("./router/admin")
+const shop = require('./router/shop')
+const goods = require("./router/goods")
+const user = require("./router/user")
+const ad = require("./router/ad")
+const siteshop = require("./router/siteshop")
+const app = express()
+app.use(bodyParser.json())
+app.use(express.static("./upload"))
+// app.all("*",function(req,res,next){
+//          res.header("Access-Control-Allow-Origin","*")
+//          res.header("Access-Control-Allow-Methods","PUT,DELETE,OPTIONS")
+//          res.header("Access-Control-Allow-Headers","content-type") 
+//          next()
+// })
+
+app.post("/adminlogin",admin.adminlogin)
+
+app.get("/adminLog",admin.adminLog)
+app.post("/addadmin",admin.addadmin)
+
+app.get("/getadminlist",admin.getadminlist)
+app.put("/changepass",admin.changepass)
+app.delete("/deleteadminlog",admin.deleteadminlog)
+
+app.post("/addshoptype",shop.addshoptype)
+app.get("/getshoptypelist",shop.getshoptypelist)
+app.delete("/deleteshoptypelist",shop.deleteShopTypeList)
+app.get("/getshoptypelistall",shop.getshoptypelistall)
+app.get("/getshopinfo",shop.getshopinfo)
+app.post("/addshop",shop.addshop)
+app.get("/getshop",shop.getshop)
+app.put("/updateshop",shop.updateshop)
+app.delete("/deleteshop",shop.deleteshop)
+
+app.post("/addgoodstype",goods.addgoodstype)
+app.get("/getgoodstype",goods.getgoodstypelist)
+app.delete("/deletegoodstype",goods.deletegoodstype)
+app.post("/addgoods",goods.addgoods)
+app.get("/getgoods",goods.getgoods)
+app.delete("/deletegoods",goods.deletegoods)
+
+app.post("/addad",ad.addad)
+app.get("/getad",ad.getad)
+app.delete("/deletead",ad.deleteAd)
+// 以下是前端展示的接口
+app.post("/getvalidate",user.getvalidate)
+app.post("/login",user.login)
+app.get("/siteshoptypelist",siteshop.getshoptypelist)
+app.get("/sitegetad",siteshop.sitegetad)
+app.get("/sitegetshoplist",siteshop.sitegetshoplist)
+app.get("/sitegetshopinfo",siteshop.sitegetshopinfo)
+app.get("/siteshoplistbyid",siteshop.siteshoplistbyid)
+
+app.post("/addcar",user.addcar)
+app.post("/downcar",user.downcar)
+app.get("/getcar",user.getcar)
+app.delete("/clearall",user.clearall)
+app.listen(80,function(){
+       console.log("成功")
+})
