@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "formidable": "^1.2.1",
     "jwt-simple": "^0.5.5",
     "md5": "^2.2.1",
